@@ -72,6 +72,7 @@ struct Metric
     display_name::String
     description::String
     dataset_type::Symbol
+end
 
     function Metric(tag::AbstractString,
                     group::AbstractString,
@@ -80,8 +81,7 @@ struct Metric
                     dataset_type::Symbol)
         valid_dataset_types = keys(tensorboard.hparams.DatasetType)
         dataset_type ∉ valid_dataset_types && throw(ArgumentError("dataset_type of $(dataset_type) is not one of $(map(string, valid_dataset_types))."))
-        new(convert(String,tag), convert(String,group), convert(String, display_name), convert(String, description), dataset_type)
-    end
+    Metric(convert(String,tag), convert(String,group), convert(String, display_name), convert(String, description), dataset_type)
 end
 
 function MetricInfo(metric::Metric)
